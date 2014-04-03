@@ -1,0 +1,426 @@
+@import "bourbon/bourbon";
+
+$orange: rgba(240,120,20,1);
+$blue: rgba(50,50,200,1);
+$grey: rgba(90,90,90,1);
+
+$yellow: rgba(254,193,92,1);
+$lightblue: rgba(76,116,185,1);
+$lighterblue: rgba(151,176,215,1);
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-family: "Gill Sans";
+}
+
+* {
+  @include box-sizing(border-box);
+}
+
+.header {
+  z-index: 20000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-image: url("header.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 181px;
+}
+
+.swiper-container, .swiper-slide {
+  width: 100%;
+  height: 200px;
+}
+
+.swiper-slide {
+  text-align: center;
+}
+
+.swiper-container {
+  margin-top: 2em;
+  // text-align: center;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  letter-spacing: 0.02em;
+}
+
+.top-container {
+  margin-top: 123px;
+  position: relative;
+  padding-top: 70px;
+  height: 400px;
+  background-color: $yellow;
+  overflow: hidden;
+  
+  border-top: solid 50px rgba(216,216,216,1);
+}
+
+.handels {
+  cursor: pointer;
+  z-index: 100;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+
+  .next, .prev {    
+    color: #fff;
+    font-size: 14px;
+    line-height: 4.5em;
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 0.15em;
+    position: absolute;
+    width: 4.5em;
+    height: 4.5em;
+    text-align: center;
+    // border: solid 1px #fff;
+    // border-radius: 100%;
+    border-bottom: solid 1px #fff;
+  }
+
+  .next {
+    left: 250px;
+  }
+
+  .prev {
+    right: 250px;
+  }
+}
+
+.cube-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  @include perspective(1000px);
+  
+  #cube {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    @include transform-style(preserve-3d);
+    @include transform(translateZ(-100px));
+    @include transition(-webkit-transform 1.0s);
+    
+    figure {
+      width: 200px;
+      height: 200px;
+      display: block;
+      position: absolute;
+
+      // border: 2px solid black;
+      // border-image: -webkit-linear-gradient(-45deg, #fff, darken($orange, 25)) 30%;
+      // @include linear-gradient(105deg, lighten($orange, 10), darken($orange, 10));
+
+      text-align: center;
+      font-size: 2.3em;
+      padding-top: 1.5em;
+      line-height: 1.2em;
+      color: #fff;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      // text-transform: uppercase;
+      
+      @include transition(all 0.2s);
+      box-shadow: none;
+    }
+  }
+}
+
+#cube .front {
+  -webkit-transform:  rotateY(0deg)
+                      translateZ(100px);
+  background-color: $orange;
+}
+
+#cube .back   {
+  -webkit-transform:  rotateX(180deg)
+                      translateZ(100px);
+  background-color: $grey;
+}
+
+#cube .right  {
+  -webkit-transform:  rotateY(90deg)
+                      translateZ(100px);
+  background-color: $blue;
+}
+
+#cube .left   {
+  -webkit-transform:  rotateY(-90deg)
+                      translateZ(100px);
+  background-color: rgba(216,216,216,1);
+}
+
+#cube .top    {
+  -webkit-transform:  rotateX(90deg)
+                      translateZ(100px);
+  background-color: rgba(216,216,216,1);
+}
+
+#cube .bottom {
+  -webkit-transform:  rotateX(-90deg)
+                      translateZ(100px);
+  background-color: rgba(216,216,216,1);
+}
+
+
+#cube.show-start {
+  -webkit-transform:  translateZ(-100px)
+                      rotateY(-20deg)
+                      rotateX(-20deg)
+                      rotateX(5deg);
+  background-color: $orange;
+}
+
+#cube.show-front  {
+  -webkit-transform:  translateZ(-100px)
+                      rotateY(   0deg);
+  figure.front {
+    @extend .gradient;
+    @extend .orange-text-gradient;
+  }
+}
+#cube.show-back   {
+  -webkit-transform:  translateZ(-100px)
+                      rotateX(-180deg);
+  figure.back {
+    @extend .gradient;
+    @extend .grey-text-gradient;
+  }
+}
+#cube.show-right  {
+  -webkit-transform:  translateZ(-100px)
+                      rotateY( -90deg);
+  figure.right {
+    @extend .gradient;
+    @extend .blue-text-gradient;
+  }
+}
+#cube.show-left   {
+  -webkit-transform: translateZ( -100px ) rotateY(   90deg );
+  figure.left {
+    @extend .gradient;
+  }
+}
+#cube.show-top    {
+  -webkit-transform: translateZ( -100px ) rotateX(  -90deg );
+  figure.top {
+    @extend .gradient;
+  }
+}
+#cube.show-bottom {
+  -webkit-transform: translateZ( -100px ) rotateX(   90deg );
+  figure.bottom {
+    @extend .gradient;
+  }
+}
+
+.gradient {
+  @include transition(all 0.6s 0.4s);
+
+  box-shadow: rgb(229, 174, 83) 1px 1px,
+    rgb(229, 174, 83) 2px 2px,
+    rgb(229, 174, 83) 3px 3px,
+    rgb(229, 174, 83) 4px 4px,
+    rgb(229, 174, 83) 5px 5px,
+    rgb(229, 174, 83) 6px 6px,
+    rgb(229, 174, 83) 7px 7px,
+    rgb(229, 174, 83) 8px 8px,
+    rgb(229, 174, 83) 9px 9px,
+    rgb(229, 174, 83) 10px 10px,
+    rgb(229, 174, 83) 11px 11px,
+    rgb(229, 174, 83) 12px 12px,
+    rgb(229, 174, 83) 13px 13px,
+    rgb(229, 174, 83) 14px 14px,
+    rgb(229, 174, 83) 15px 15px,
+    rgb(229, 174, 83) 16px 16px,
+    rgb(229, 174, 83) 17px 17px,
+    rgb(229, 174, 83) 18px 18px,
+    rgb(229, 174, 83) 19px 19px,
+    rgb(229, 174, 83) 20px 20px,
+    rgb(229, 174, 83) 21px 21px,
+    rgb(229, 174, 83) 22px 22px,
+    rgb(229, 174, 83) 23px 23px,
+    rgb(229, 174, 83) 24px 24px,
+    rgb(229, 174, 83) 25px 25px,
+    rgb(229, 174, 83) 26px 26px,
+    rgb(229, 174, 83) 27px 27px,
+    rgb(229, 174, 83) 28px 28px,
+    rgb(229, 174, 83) 29px 29px,
+    rgb(229, 174, 83) 30px 30px,
+    rgb(229, 174, 83) 31px 31px,
+    rgb(229, 174, 83) 32px 32px,
+    rgb(229, 174, 83) 33px 33px,
+    rgb(229, 174, 83) 34px 34px,
+    rgb(229, 174, 83) 35px 35px,
+    rgb(229, 174, 83) 36px 36px,
+    rgb(229, 174, 83) 37px 37px,
+    rgb(229, 174, 83) 38px 38px,
+    rgb(229, 174, 83) 39px 39px,
+    rgb(229, 174, 83) 40px 40px,
+    rgb(229, 174, 83) 41px 41px,
+    rgb(229, 174, 83) 42px 42px,
+    rgb(230, 174, 83) 43px 43px,
+    rgb(230, 175, 83) 44px 44px,
+    rgb(231, 175, 83) 45px 45px,
+    rgb(231, 175, 83) 46px 46px,
+    rgb(231, 176, 84) 47px 47px,
+    rgb(232, 176, 84) 48px 48px,
+    rgb(232, 176, 84) 49px 49px,
+    rgb(233, 177, 84) 50px 50px,
+    rgb(233, 177, 84) 51px 51px,
+    rgb(234, 177, 84) 52px 52px,
+    rgb(234, 178, 84) 53px 53px,
+    rgb(234, 178, 85) 54px 54px,
+    rgb(235, 178, 85) 55px 55px,
+    rgb(235, 179, 85) 56px 56px,
+    rgb(236, 179, 85) 57px 57px,
+    rgb(236, 179, 85) 58px 58px,
+    rgb(236, 180, 85) 59px 59px,
+    rgb(237, 180, 86) 60px 60px,
+    rgb(237, 180, 86) 61px 61px,
+    rgb(238, 180, 86) 62px 62px,
+    rgb(238, 181, 86) 63px 63px,
+    rgb(239, 181, 86) 64px 64px,
+    rgb(239, 181, 86) 65px 65px,
+    rgb(239, 182, 86) 66px 66px,
+    rgb(240, 182, 87) 67px 67px,
+    rgb(240, 182, 87) 68px 68px,
+    rgb(241, 183, 87) 69px 69px,
+    rgb(241, 183, 87) 70px 70px,
+    rgb(241, 183, 87) 71px 71px,
+    rgb(242, 184, 87) 72px 72px,
+    rgb(242, 184, 87) 73px 73px,
+    rgb(243, 184, 88) 74px 74px,
+    rgb(243, 185, 88) 75px 75px,
+    rgb(244, 185, 88) 76px 76px,
+    rgb(244, 185, 88) 77px 77px,
+    rgb(244, 186, 88) 78px 78px,
+    rgb(245, 186, 88) 79px 79px,
+    rgb(245, 186, 89) 80px 80px,
+    rgb(246, 186, 89) 81px 81px,
+    rgb(246, 187, 89) 82px 82px,
+    rgb(246, 187, 89) 83px 83px,
+    rgb(247, 187, 89) 84px 84px,
+    rgb(247, 188, 89) 85px 85px,
+    rgb(248, 188, 89) 86px 86px,
+    rgb(248, 188, 90) 87px 87px,
+    rgb(249, 189, 90) 88px 88px,
+    rgb(249, 189, 90) 89px 89px,
+    rgb(249, 189, 90) 90px 90px,
+    rgb(250, 190, 90) 91px 91px,
+    rgb(250, 190, 90) 92px 92px,
+    rgb(251, 190, 90) 93px 93px,
+    rgb(251, 191, 91) 94px 94px,
+    rgb(251, 191, 91) 95px 95px,
+    rgb(252, 191, 91) 96px 96px,
+    rgb(252, 192, 91) 97px 97px,
+    rgb(253, 192, 91) 98px 98px,
+    rgb(253, 192, 91) 99px 99px,
+    rgb(254, 193, 92) 100px 100px;
+}
+
+.orange-text-gradient {
+  text-shadow: rgb(216, 108, 18) 1px 1px,
+    rgb(216, 108, 18) 2px 2px,
+    rgb(216, 108, 18) 3px 3px,
+    rgb(216, 108, 18) 4px 4px,
+    rgb(216, 108, 18) 5px 5px,
+    rgb(216, 108, 18) 6px 6px,
+    rgb(216, 108, 18) 7px 7px,
+    rgb(216, 108, 18) 8px 8px,
+    rgb(216, 108, 18) 9px 9px,
+    rgb(216, 108, 18) 10px 10px,
+    rgb(216, 108, 18) 11px 11px,
+    rgb(216, 108, 18) 12px 12px,
+    rgb(217, 108, 18) 13px 13px,
+    rgb(218, 109, 18) 14px 14px,
+    rgb(220, 110, 18) 15px 15px,
+    rgb(221, 110, 18) 16px 16px,
+    rgb(222, 111, 18) 17px 17px,
+    rgb(224, 112, 18) 18px 18px,
+    rgb(225, 112, 18) 19px 19px,
+    rgb(226, 113, 18) 20px 20px,
+    rgb(228, 114, 19) 21px 21px,
+    rgb(229, 114, 19) 22px 22px,
+    rgb(230, 115, 19) 23px 23px,
+    rgb(232, 116, 19) 24px 24px,
+    rgb(233, 116, 19) 25px 25px,
+    rgb(234, 117, 19) 26px 26px,
+    rgb(236, 118, 19) 27px 27px,
+    rgb(237, 118, 19) 28px 28px,
+    rgb(238, 119, 19) 29px 29px,
+    rgb(240, 120, 20) 30px 30px;
+}
+
+.blue-text-gradient {
+  text-shadow: rgb(45, 45, 180) 1px 1px,
+    rgb(45, 45, 180) 2px 2px,
+    rgb(45, 45, 180) 3px 3px,
+    rgb(45, 45, 180) 4px 4px,
+    rgb(45, 45, 180) 5px 5px,
+    rgb(45, 45, 180) 6px 6px,
+    rgb(45, 45, 180) 7px 7px,
+    rgb(45, 45, 180) 8px 8px,
+    rgb(45, 45, 180) 9px 9px,
+    rgb(45, 45, 180) 10px 10px,
+    rgb(45, 45, 180) 11px 11px,
+    rgb(45, 45, 180) 12px 12px,
+    rgb(45, 45, 181) 13px 13px,
+    rgb(45, 45, 182) 14px 14px,
+    rgb(45, 45, 183) 15px 15px,
+    rgb(46, 46, 184) 16px 16px,
+    rgb(46, 46, 185) 17px 17px,
+    rgb(46, 46, 186) 18px 18px,
+    rgb(46, 46, 187) 19px 19px,
+    rgb(47, 47, 188) 20px 20px,
+    rgb(47, 47, 190) 21px 21px,
+    rgb(47, 47, 191) 22px 22px,
+    rgb(48, 48, 192) 23px 23px,
+    rgb(48, 48, 193) 24px 24px,
+    rgb(48, 48, 194) 25px 25px,
+    rgb(48, 48, 195) 26px 26px,
+    rgb(49, 49, 196) 27px 27px,
+    rgb(49, 49, 197) 28px 28px,
+    rgb(49, 49, 198) 29px 29px,
+    rgb(50, 50, 200) 30px 30px;
+}
+
+.grey-text-gradient {
+  text-shadow: rgb(81, 81, 81) 1px 1px,
+    rgb(81, 81, 81) 2px 2px,
+    rgb(81, 81, 81) 3px 3px,
+    rgb(81, 81, 81) 4px 4px,
+    rgb(81, 81, 81) 5px 5px,
+    rgb(81, 81, 81) 6px 6px,
+    rgb(81, 81, 81) 7px 7px,
+    rgb(81, 81, 81) 8px 8px,
+    rgb(81, 81, 81) 9px 9px,
+    rgb(81, 81, 81) 10px 10px,
+    rgb(81, 81, 81) 11px 11px,
+    rgb(81, 81, 81) 12px 12px,
+    rgb(81, 81, 81) 13px 13px,
+    rgb(82, 82, 82) 14px 14px,
+    rgb(82, 82, 82) 15px 15px,
+    rgb(83, 83, 83) 16px 16px,
+    rgb(83, 83, 83) 17px 17px,
+    rgb(84, 84, 84) 18px 18px,
+    rgb(84, 84, 84) 19px 19px,
+    rgb(85, 85, 85) 20px 20px,
+    rgb(85, 85, 85) 21px 21px,
+    rgb(86, 86, 86) 22px 22px,
+    rgb(86, 86, 86) 23px 23px,
+    rgb(87, 87, 87) 24px 24px,
+    rgb(87, 87, 87) 25px 25px,
+    rgb(88, 88, 88) 26px 26px,
+    rgb(88, 88, 88) 27px 27px,
+    rgb(89, 89, 89) 28px 28px,
+    rgb(89, 89, 89) 29px 29px,
+    rgb(90, 90, 90) 30px 30px;
+}
